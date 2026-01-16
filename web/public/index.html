@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Salutare</title>
+    <meta name="description" content="Salutare – a daily greeting in a different language."/>
+
+    <!--
+      Optional API base override for local development.
+
+      - Production (same domain as API):
+          leave empty => JS will call /api/v1/greeting
+
+      - Local development (Rust service on localhost:8080):
+          set content to "http://localhost:8080"
+    -->
+    <meta name="salutare-api-base" content="http://localhost:8080"/>
+
+    <link rel="stylesheet" href="./styles.css"/>
+    <!-- main.js is generated from TypeScript -->
+    <script defer src="./main.js"></script>
+</head>
+
+<body>
+<main class="page" aria-live="polite">
+    <section class="content" role="region" aria-label="Daily greeting">
+        <div class="greeting" id="greeting">Salutare</div>
+        <div class="language" id="language">Loading…</div>
+
+        <div class="error" id="error" hidden></div>
+    </section>
+
+    <footer class="footer">
+        <a
+                class="repo"
+                href="https://github.com/danielkbx/salutare"
+                rel="noopener noreferrer"
+                target="_blank"
+        >
+            GitHub
+        </a>
+    </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,110 @@
+/* ---------------------------------------
+   Salutare landing page styles
+   - No external libraries
+   - System font stack (fast, privacy-friendly)
+   - Bright, optimistic, premium look
+---------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+:root {
+    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+body {
+    margin: 0;
+    color: rgba(12, 15, 20, 0.92);
+    background: #f6f7fb;
+}
+
+/* Subtle premium background (image-ready later).
+   If you add a background image later, we can adapt this overlay. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(900px 500px at 20% 15%, rgba(120, 170, 255, 0.22), transparent 60%),
+    radial-gradient(900px 500px at 80% 20%, rgba(255, 190, 120, 0.20), transparent 60%),
+    radial-gradient(900px 500px at 50% 80%, rgba(140, 220, 180, 0.18), transparent 65%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.65));
+    pointer-events: none;
+    z-index: -1;
+}
+
+.page {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.content {
+    display: grid;
+    place-items: center;
+    padding: 6vh 6vw 4vh;
+    text-align: center;
+}
+
+.greeting {
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-weight: 600;
+
+    /* Responsive but controlled */
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
+
+    max-width: 18ch;
+    padding: 0.2em 0.1em;
+}
+
+.language {
+    margin-top: 0.35rem; /* closer to the greeting */
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: rgba(12, 15, 20, 0.62);
+    letter-spacing: 0.01em;
+}
+
+.error {
+    margin-top: 1.0rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: rgba(200, 40, 40, 0.9);
+}
+
+.footer {
+    padding: 1.5rem 6vw 1.75rem;
+    display: flex;
+    justify-content: center;
+}
+
+.repo {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: rgba(12, 15, 20, 0.62);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(12, 15, 20, 0.25);
+    padding-bottom: 2px;
+}
+
+.repo:hover {
+    color: rgba(12, 15, 20, 0.85);
+    border-bottom-color: rgba(12, 15, 20, 0.5);
+}
+
+.repo:focus {
+    outline: 2px solid rgba(12, 15, 20, 0.25);
+    outline-offset: 6px;
+    border-bottom-color: transparent;
+}
