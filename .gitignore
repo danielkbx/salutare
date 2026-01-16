@@ -1,0 +1,28 @@
+# Rust / Cargo
+/target/
+
+# Don't know yet if it is a good idea
+#Cargo.lock
+
+/**/*.rs.bk
+
+# Environment / secrets
+.env
+.env.*
+salutare.env
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# JetBrains / RustRover
+.idea/
+*.iml
+
+# Editor swap / temp files
+*.swp
+*.swo
+*~

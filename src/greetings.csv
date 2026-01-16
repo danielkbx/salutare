@@ -1,0 +1,375 @@
+Nr,Guten Morgen (in der jeweiligen Sprache),Sprache (Deutsch),Sprache (Englisch)
+1,Guten Morgen,Deutsch,German
+2,Good morning,Englisch,English
+3,Bonjour,Französisch,French
+4,Buenos días,Spanisch,Spanish
+5,Bom dia,Portugiesisch,Portuguese
+6,Buongiorno,Italienisch,Italian
+7,Goedemorgen,Niederländisch,Dutch
+8,God morgon,Schwedisch,Swedish
+9,God morgen,Norwegisch,Norwegian
+10,Godmorgen,Dänisch,Danish
+11,Hyvää huomenta,Finnisch,Finnish
+12,Góðan morgun,Isländisch,Icelandic
+13,Bună dimineața,Rumänisch,Romanian
+14,Jó reggelt,Ungarisch,Hungarian
+15,Dobré ráno,Tschechisch,Czech
+16,Dobré ráno,Slowakisch,Slovak
+17,Dzień dobry,Polnisch,Polish
+18,Доброе утро,Russisch,Russian
+19,Доброго ранку,Ukrainisch,Ukrainian
+20,Добрай раніцы,Belarussisch,Belarusian
+21,Добро утро,Bulgarisch,Bulgarian
+22,Καλημέρα,Griechisch,Greek
+23,Günaydın,Türkisch,Turkish
+24,Labas rytas,Litauisch,Lithuanian
+25,Labrīt,Lettisch,Latvian
+26,Tere hommikust,Estnisch,Estonian
+27,Dobro jutro,Kroatisch,Croatian
+28,Dobro jutro,Serbisch,Serbian
+29,Dobro jutro,Slowenisch,Slovenian
+30,Mirëmëngjes,Albanisch,Albanian
+31,Gudde Moien,Luxemburgisch,Luxembourgish
+32,Bongu,Maltesisch,Maltese
+33,Maidin mhaith,Irisch,Irish
+34,Bore da,Walisisch,Welsh
+35,Madainn mhath,Schottisch-Gälisch,Scottish Gaelic
+36,Bon dia,Katalanisch,Catalan
+37,Bos días,Galicisch,Galician
+38,Egun on,Baskisch,Basque
+39,Bonghjornu,Korsisch,Corsican
+40,Bon dì,Venezianisch,Venetian
+41,Bon jornu,Sizilianisch,Sicilian
+42,Bonos díes,Asturisch,Asturian
+43,Goeiemôre,Afrikaans,Afrikaans
+44,Goeie môre,Niederdeutsch,Low German
+45,Guete Morge,Schweizerdeutsch,Swiss German
+46,Guden Morgen,Nordfriesisch,North Frisian
+47,Sawubona ekuseni,Zulu,Zulu
+48,Molweni,Xhosa,Xhosa
+49,صباح الخير,Arabisch,Arabic
+50,בוקר טוב,Hebräisch,Hebrew
+51,صبح بخیر,Persisch,Persian
+52,سهار مو پخير,Paschtu,Pashto
+53,Բարի լույս,Armenisch,Armenian
+54,დილა მშვიდობისა,Georgisch,Georgian
+55,Sabahınız xeyir,Aserbaidschanisch,Azerbaijani
+56,Қайырлы таң,Kasachisch,Kazakh
+57,Xayrli tong,Usbekisch,Uzbek
+58,Кутман таң,Kirgisisch,Kyrgyz
+59,Субҳ ба хайр,Tadschikisch,Tajik
+60,Өглөөний мэнд,Mongolisch,Mongolian
+61,सुप्रभात,Hindi,Hindi
+62,শুভ সকাল,Bengalisch,Bengali
+63,صبح بخیر,Urdu,Urdu
+64,ਸਤ ਸ੍ਰੀ ਅਕਾਲ,Punjabi,Punjabi
+65,સુપ્રભાત,Gujarati,Gujarati
+66,ଶୁଭ ସକାଳ,Odia,Odia
+67,সুপ্ৰভাত,Assamesisch,Assamese
+68,काळी वंदन,Konkani,Konkani
+69,காலை வணக்கம்,Tamil,Tamil
+70,శుభోదయం,Telugu,Telugu
+71,ಶುಭೋದಯ,Kannada,Kannada
+72,സുപ്രഭാതം,Malayalam,Malayalam
+73,सुप्रभात,Marathi,Marathi
+74,शुभ प्रभात,Nepali,Nepali
+75,සුභ උදෑසනක්,Singhalesisch,Sinhala
+76,ཞོགས་པ་བདེ་ལེགས,Tibetisch,Tibetan
+77,ཞོགས་པ་བདེ་ལེགས,Dzongkha,Dzongkha
+78,早上好,Chinesisch (Mandarin),Chinese (Mandarin)
+79,早晨,Kantonesisch,Cantonese
+80,早安,Hakka,Hakka
+81,早安,Min Nan,Min Nan
+82,おはようございます,Japanisch,Japanese
+83,좋은 아침입니다,Koreanisch,Korean
+84,Chào buổi sáng,Vietnamesisch,Vietnamese
+85,สวัสดีตอนเช้า,Thailändisch,Thai
+86,Selamat pagi,Indonesisch,Indonesian
+87,Selamat pagi,Malaiisch,Malay
+88,Magandang umaga,Tagalog,Tagalog
+89,Maayong buntag,Cebuano,Cebuano
+90,Naimbag a bigat,Ilokano,Ilocano
+91,Sugeng enjing,Javanisch,Javanese
+92,Wilujeng énjing,Sundanesisch,Sundanese
+93,ສະບາຍດີຕອນເຊົ້າ,Laotisch,Lao
+94,អរុណសួស្តី,Khmer,Khmer
+95,မင်္ဂလာပါ မနက်ခင်းပါ,Birmanisch,Burmese
+96,እንደምን አደርክ,Amharisch,Amharic
+97,E káàárọ̀,Yoruba,Yoruba
+98,Ụtụtụ ọma,Igbo,Igbo
+99,Ina kwana,Hausa,Hausa
+100,Subax wanaagsan,Somali,Somali
+101,Habari za asubuhi,Swahili,Swahili
+102,I ni sogoma,Bambara,Bambara
+103,Suba si,Wolof,Wolof
+104,Jam waali,Fulfulde,Fula
+105,Maakye,Twi,Twi
+106,Ŋdi,Ewe,Ewe
+107,Kudo,Fon,Fon
+108,Mbote na ntɔ́ngɔ́,Lingala,Lingala
+109,Wasuze otya nno,Luganda,Ganda
+110,Mwaramutse,Kinyarwanda,Kinyarwanda
+111,Mwaramutse,Kirundi,Kirundi
+112,Mangwanani,Shona,Shona
+113,Mwadzuka bwanji,Chichewa,Chichewa
+114,Dumela,Setswana,Tswana
+115,Dumela,Sesotho,Southern Sotho
+116,Azul,Kabylisch,Kabyle
+117,Azul,Tamazight,Tamazight
+118,Cualli tonalli,Nahuatl,Nahuatl
+119,Kamisaraki,Aymara,Aymara
+120,Yáʼátʼééh abíní,Navajo,Navajo
+121,ᎣᏏᏲ,Cherokee,Cherokee
+122,Saqarik,K'iche',K'iche'
+123,Ma'alo'ob k'iin,Yukatekisches Maya,Yucatec Maya
+124,Bonjou,Haitianisch-Kreol,Haitian Creole
+125,Gut moning,Tok Pisin,Tok Pisin
+126,Gud moning,Bislama,Bislama
+127,Gud mɔnin,Krio,Krio
+128,Ata mārie,Maori,Māori
+129,Aloha kakahiaka,Hawaiisch,Hawaiian
+130,Ni sa bula,Fidschianisch,Fijian
+131,Oa mai le taeao,Samoanisch,Samoan
+132,Mālō e lelei,Tongaisch,Tongan
+133,Mālō ni,Tuvaluisch,Tuvaluan
+134,Aluu,Grönländisch,Kalaallisut
+135,Buorre iđit,Nordsamisch,Northern Sami
+136,Irankarapte,Ainu,Ainu
+137,ᐅᓐᓄᒃᓴᒃ,Inuktitut,Inuktitut
+138,Allin ko'ẽ,Guaraní,Guaraní
+139,Allin p'unchay,Quechua,Quechua
+140,Bonan matenon,Esperanto,Esperanto
+141,Bona matino,Ido,Ido
+142,Bon matino,Interlingua,Interlingua
+143,coi,Lojban,Lojban
+144,tenpo suno pona,Toki Pona,Toki Pona
+145,poʼ waʼleS,Klingonisch,Klingon
+146,Minuial vê,Sindarin,Sindarin
+147,Elen síla lúmenn’ omentielvo,Quenya,Quenya
+148,Sul sul,Simlisch,Simlish
+149,Bonum mane,Latein,Latin
+150,Ἀγαθὸν πρωΐ,Altgriechisch,Ancient Greek
+151,שְׁלָם לְךָ,Aramäisch,Aramaic
+152,ⲙⲁⲣⲉⲛⲟⲩϥ,Koptisch,Coptic
+153,Bore da,Kymrisch (klassisch),Classical Welsh
+154,Salaam,Akkadisch,Akkadian
+155,Athchomar chomakaan,Dothraki,Dothraki
+156,Rytsas,Hochvalyrisch,High Valyrian
+157,Kaltxì,Na’vi,Na'vi
+158,Mellon,Khuzdul (Zwergensprache),Khuzdul
+159,Suilad,Quenya (Gruß),Quenya (greeting)
+160,Suilad,Sindarin (Gruß),Sindarin (greeting)
+161,Ahoy,Piratensprache,Pirate
+162,Nanu nanu,"Vulkanisch (Star Trek, Spaß)",Vulcan (fun)
+163,Allons-y!,"Time Lord (Dr. Who, Spaß)",Time Lord (fun)
+164,Moin,Plattdeutsch / Norddeutsch,Northern German (regional)
+165,Moin Moin,Norddeutsch (doppelt),Northern German (double)
+166,Gude,Hessisch,Hessian (German dialect)
+167,Guude Morsche,Hessisch (Frankfurt),Hessian (Frankfurt)
+168,Servus,Bairisch / Österreichisch,Bavarian/Austrian (regional)
+169,Griaß di,Bairisch (informell),Bavarian (informal)
+170,Grüezi,Schweizerdeutsch (Gruß),Swiss German (greeting)
+171,Griaß enk,Österreichisch (Plural),Austrian (plural)
+172,Morsche,Rheinländisch,Rhineland (German dialect)
+173,Moien,Luxemburgisch (regional),Luxembourgish (regional)
+174,Dia dhuit ar maidin,Irisch (formeller Morgen),Irish (morning)
+175,Bore da,Walisisch (Variante),Welsh (variant)
+176,Demat,Bretonisch (kurz),Breton (short)
+177,Bun di,Rätoromanisch,Romansh
+178,Bon dia,Okzitanisch (Variante),Occitan (variant)
+179,Dobrý den,Slowakisch (Tagesgruß),Slovak (day greeting)
+180,Góðan dag,Isländisch (Tagesgruß),Icelandic (day greeting)
+181,Góðan morgun,Färöisch,Faroese
+182,Moghrey mie,Manx,Manx
+183,Guid mornin,Scots,Scots
+184,Demat deoc’h,Gallo,Gallo
+185,Bonghjornu,Sardisch (Gruß),Sardinian (greeting)
+186,Ndewo ụtụtụ,Igbo (Variante),Igbo (variant)
+187,E kaaro,Yoruba (Variante),Yoruba (variant)
+188,As-salaamu ʿalaykum,Arabisch (Grußformel),Arabic (greeting formula)
+189,Shubho shokal,Bengalisch (Transkription),Bengali (romanized)
+190,Namaste,Nepali (Variante),Nepali (variant)
+191,Sat sri akaal,Punjabi (Transkription),Punjabi (romanized)
+192,Kia ora,Maori (kurz),Māori (short)
+193,Iorana,Rapa Nui,Rapa Nui
+194,Talofa,Samoanisch (kurz),Samoan (short)
+195,Mālō e lelei,Niueanisch,Niuean
+196,Bula,Fidschianisch (kurz),Fijian (short)
+197,Halo,"Maori (inoffiziell, Spaß)",Māori (fun)
+198,Wáa sáa neʼ,"Diné Bizaad (Navajo, Variante)",Navajo (variant)
+199,Osiyo,Cherokee (Latin),Cherokee (latin)
+200,Kwe’,Mi’kmaq,Mi'kmaq
+201,Salve mane,Latein (Variante),Latin (variant)
+202,Χαῖρε πρωΐ,Altgriechisch (Variante),Ancient Greek (variant)
+203,Shlama ṣapra,Syrisch,Syriac
+204,Pax vobiscum,Kirchenlatein,Ecclesiastical Latin
+205,Myttin da,Kornisch (Variante),Cornish (variant)
+206,Demat mat,Bretonisch (Variante),Breton (variant)
+207,Bore da bawb,Walisisch (Plural),Welsh (plural)
+208,Maidin mhaith duit,Irisch (Variante),Irish (variant)
+209,Bun dì a töt,Ladinisch,Ladin
+210,Bun dé,Friaulisch,Friulian
+211,Bon di,Rätoromanisch (Variante),Romansh (variant)
+212,Bon dì,Lombardisch,Lombard
+213,Bon dì,Piemontesisch,Piedmontese
+214,Bon dì,Emilianisch,Emilian
+215,Dobro jutro,Bosnisch (Variante),Bosnian (variant)
+216,Добро јутро,Montenegrinisch,Montenegrin
+217,Dobré ráno,Sorbisch (Obersorbisch),Upper Sorbian
+218,Dobre ranje,Niedersorbisch,Lower Sorbian
+219,Доброе утро,Russinisch,Rusyn
+220,Сайн де хьо,Tschetschenisch,Chechen
+221,Салам алейкум,Lesgisch,Lezgian
+222,Маршалла дех,Awarisch,Avar
+223,Салам,Lakisch,Lak
+224,Салам,Darginisch,Dargwa
+225,صباح النور,Arabisch (Variante),Arabic (variant)
+226,Beyanî baş,Kurdisch (Kurmandschi),Kurdish (Kurmanji)
+227,Beyanî باش,Kurdisch (Sorani),Kurdish (Sorani)
+228,Roj baş,Kurdisch (informell),Kurdish (informal)
+229,Wa uhala po,Ndonga,Ndonga
+230,Moro,Herero,Herero
+231,Avuxeni,Xitsonga,Tsonga
+232,Ndi matsheloni,Tshivenda,Venda
+233,Sawubona,Siswati,Swati
+234,Balaô,Sango,Sango
+235,Moro moro,Kanuri,Kanuri
+236,Ɛte sɛn,Fante,Fante
+237,I ni ce,Dioula,Dioula
+238,Barka da safe,Hausa (Variante),Hausa (variant)
+239,Barka,Zarma,Zarma
+240,Ashe,Edo,Edo
+241,Kwe’,Mohawk,Mohawk
+242,Kwe,Cree,Cree
+243,Wachiyanake,Lakota,Lakota
+244,Háu mitákuyepi,Dakota,Dakota
+245,Tânsi,Plains Cree,Plains Cree
+246,Skennen’kó:wa,Mohawk (Variante),Mohawk (variant)
+247,Klahowya,Chinook Jargon,Chinook Jargon
+248,Allin punchaw,Quechua (Variante),Quechua (variant)
+249,Sugeng enjing sedaya,Javanisch (höflich),Javanese (polite)
+250,Wilujeng enjing,Sundanesisch (kurz),Sundanese (short)
+251,Kumusta umaga,Tagalog (Variante),Tagalog (variant)
+252,Selamat pagi semua,Malaiisch (Plural),Malay (plural)
+253,Subha prabhat,Hindi (Transkription),Hindi (romanized)
+254,Ohayō,Japanisch (informell),Japanese (informal)
+255,Annyeong achim,Koreanisch (informell),Korean (informal)
+256,Zǎo ān,Chinesisch (Transkription),Chinese (romanized)
+257,Ia ora na,Tahitianisch,Tahitian
+258,Kia orana,Cook-Islands-Maori,Cook Islands Māori
+259,Halo moning,Tok Pisin (Variante),Tok Pisin (variant)
+260,Gud moning,Pijin,Pijin
+261,Valar morghulis,Hochvalyrisch (Gruß),High Valyrian (greeting)
+262,Rytsas!,Valyrisch (kurz),Valyrian (short)
+263,Suilad,Sindarin (Variante),Sindarin (variant)
+264,Hail,Altenglisch,Old English
+265,Wes þu hál,Altenglisch (Variante),Old English (variant)
+266,Sata sri akal,Punjabi (Variante),Punjabi (variant)
+267,Heill,Altnordisch,Old Norse
+268,Доброє утро,Altkirchenslawisch,Old Church Slavonic
+269,𐌷𐌰𐌹𐍃𐌺𐍉𐍃,Gotisch,Gothic
+270,𐎧𐎼𐏁𐎴𐎶𐎶𐎡𐎹,Altpersisch,Old Persian
+271,𒅗𒈬𒈠,Sumerisch,Sumerian
+272,Shlama,Biblisches Aramäisch,Biblical Aramaic
+273,Boker tov,Biblisches Hebräisch,Biblical Hebrew
+274,Χαῖρε,Koine-Griechisch,Koine Greek
+275,Ave mane,Vulgärlatein,Vulgar Latin
+276,Kwe',Ojibwe,Ojibwe
+277,Wachíŋyaŋ,Lakota (Variante),Lakota (variant)
+278,Hágoóneeʼ,"Diné Bizaad (Navajo, klassisch)",Navajo (classical)
+279,Sken:nen,Mohawk (Kurzgruß),Mohawk (short)
+280,Shekóli,Oneida,Oneida
+281,Yawʌ́·ko,Tuscarora,Tuscarora
+282,Yokwe,Marshallese,Marshallese
+283,Kia ora rā,Maori (formell),Māori (formal)
+284,Iakwe,Chuukese,Chuukese
+285,Kaselehlie,Pohnpeian,Pohnpeian
+286,Yá'át'ééh,Navajo (Kurzform),Navajo (short)
+287,Bix a beel,Tzotzil,Tzotzil
+288,Saqarik junam,Kaqchikel,Kaqchikel
+289,Bats'i k'op,Tseltal,Tseltal
+290,Jamásá,Embera,Embera
+291,Egun ti,Yoruba (historisch),Yoruba (historical)
+292,Mbote,Kikongo,Kikongo
+293,Wasuze otya,Runyankole,Runyankole
+294,Mirembe,Lusoga,Lusoga
+295,Kanimambo,Makhuwa,Makhuwa
+296,Amesegenallo,Tigrinya (Variante),Tigrinya (variant)
+297,Mbolo,Fang,Fang
+298,Sannu,Kanembu,Kanembu
+299,Etaa,Beti,Beti
+300,Laafi bala,Moore,Mooré
+301,Fofo,Gbaya,Gbaya
+302,Akwaba,Baoulé,Baoulé
+303,Kudhi,Luo,Luo
+304,Sain baina uu,Burjatisch,Buryat
+305,Amar sain uu,Tuwinisch,Tuvan
+306,Sain uu,Oiratisch,Oirat
+307,Mendë,Mandschurisch,Manchu
+308,Sain baina,Kalmückisch,Kalmyk
+309,Sain uu baina,Chakassisch,Khakas
+310,Tʼai ho,Zhuang,Zhuang
+311,Vanakkam,Alt-Tamil,Old Tamil
+312,Namaskāra,Sanskrit,Sanskrit
+313,Suprabhatam,Prakrit,Prakrit
+314,Khurumjari,Santali,Santali
+315,Johar,Kurukh,Kurukh
+316,Subhodaya,Pali,Pali
+317,Tashi delek,Ladakhisch,Ladakhi
+318,Kölsche Morje,Kölsch,Colognian
+319,Morsche,Schwäbisch,Swabian
+320,Griaß God,Oberösterreichisch,Upper Austrian
+321,Servas,Wienerisch,Viennese German
+322,Guata Morga,Vorarlbergerisch,Vorarlberg Alemannic
+323,Guete Tag,Alemannisch,Alemannic
+324,Gude,Mainzisch,Mainz German
+325,Moin,Ostfriesisch,East Frisian German
+326,Môge,Ripuarisch,Ripuarian
+327,Gudde Moije,Saarländisch,Saarland German
+328,Morjen,Berlinerisch,Berlin German
+329,Moie,Platt Luxemburger Grenzraum,Moselle Franconian
+330,Hoi,Schwyzerdütsch (kurz),Swiss German (short)
+331,Ash nazg,Schwarze Sprache Mordors,Black Speech
+332,Hail traveler,Common Tongue (Fantasy),Common Tongue (fantasy)
+333,Sáma sapa,Dovahzul,Dovahzul
+334,S'truth,Thieves' Cant,Thieves' Cant
+335,Vas a morghulis,Valyrisch (Variante),Valyrian (variant)
+336,Saesa,Valyrisch (klassisch),Classical Valyrian
+337,Witaj,Polnisch (historisch),Polish (historical)
+338,Dzień dobry,Kaschubisch,Kashubian
+339,Dobro jutro,Bunjevac,Bunjevac
+340,Bun di,Istriotisch,Istriot
+341,Bon dia,Aranesisch,Aranese
+342,Màtin bun,Frankoprovenzalisch,Franco-Provençal
+343,Bon matin,Wallonisch,Walloon
+344,Maten goe,Zeeländisch,Zeelandic
+345,God morgun,Nynorsk,Norwegian Nynorsk
+346,God morgen,Bokmål,Norwegian Bokmål
+347,Shubhodaya,Konkani (Variante),Konkani (variant)
+348,Suprabhat,Gujarati (Transkription),Gujarati (romanized)
+349,Johar ji,Ho,Ho
+350,Khurumjari,Mundari,Mundari
+351,Palya,Pitjantjatjara,Pitjantjatjara
+352,Yuwa,Yolŋu Matha,Yolngu Matha
+353,Wiya,Noongar,Noongar
+354,Yo,Torres-Strait-Kreol,Torres Strait Creole
+355,Monin tru,Tokelauan,Tokelauan
+356,Aanii,Anishinaabemowin,Anishinaabemowin
+357,Tawnshi,Michif,Michif
+358,She:kon,Onondaga,Onondaga
+359,Kwe kwe,Algonquin,Algonquin
+360,Fofo re,Senufo,Senufo
+361,Mbolo,Mongo,Mongo
+362,Bari laafi,Songhai,Songhai
+363,Sain baina,Alt-Mongolisch,Old Mongolian
+364,Namaste,Alt-Nepali,Old Nepali
+365,Vanakkam,Tamil (klassisch),Classical Tamil
+366,Johar,Munda (Sammelbegriff),Munda languages
+367,Juten Morgen,Missingsch,Missingsch
+368,Morjen,Mecklenburgisch,Mecklenburg German
+369,Gode Moarn,Saterfriesisch,Saterland Frisian
+370,Mojn,Nordschleswigsch,North Schleswig German
+371,Grias eich,Tirolerisch,Tyrolean German
+372,Gudödi,Volapük (Variante),Volapük (variant)
+373,Co'i rodo,Lojban (Gruß),Lojban (greeting)
+374,Vanu shalam,Atlantean,Atlantean
