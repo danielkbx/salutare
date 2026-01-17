@@ -17,14 +17,21 @@ The API is publicly available at
 
 ---
 
+## Name
+
+*Salutare* comes from Latin and means “to greet”. The name reflects the imperative nature of the project: greetings that are direct, intentional, and universal.
+
+---
+
 ## Concept
 
 - One greeting per day
 - No repetition until all greetings are used
 - UTC-based day change
+- Stateless HTTP server
 - Simple, public, and reliable
 
-Salutare can be used directly in a browser, embedded into other projects, or accessed programmatically via its API.
+Salutare can be used directly in a browser, as a PWA app, embedded into other projects, or accessed programmatically via its API.
 
 ---
 
