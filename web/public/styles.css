@@ -2,20 +2,39 @@
    Salutare landing page styles
    - No external libraries
    - System font stack (fast, privacy-friendly)
-   - Bright, optimistic, premium look
+   - Bright, optimistic, premium sunrise look
+   - Theme is driven by CSS variables (set by JS):
+       --accent-muted  : used for quotes + language label
+       --bg-gradients  : current background gradients
+       --bg-next       : next background gradients (overlay during transition)
+       --bg-transition : 0/1 -> controls overlay opacity
+   - Background transition uses a two-layer approach:
+       body::before = stable base
+       body::after  = fades in new background (no background interpolation required)
 ---------------------------------------- */
 
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 
 :root {
     --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+    /* Default accent (fallback until JS applies a themed accent) */
+    --accent-muted: rgba(225, 145, 85, 0.78);
+
+    /* Default background gradients (fallback until JS applies a themed background) */
+    --bg-gradients:
+            radial-gradient(1000px 600px at 20% 18%, rgba(255, 200, 120, 0.55), transparent 60%),
+            radial-gradient(900px 520px at 80% 20%, rgba(255, 160, 90, 0.45), transparent 60%),
+            radial-gradient(1100px 650px at 50% 85%, rgba(170, 230, 200, 0.30), transparent 65%),
+            linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,245,235,0.82));
+
+    /* Next background (used during transition overlay) */
+    --bg-next: var(--bg-gradients);
+
+    /* 0 = overlay hidden, 1 = overlay visible */
+    --bg-transition: 0;
 }
 
 body {
@@ -24,58 +43,106 @@ body {
     background: #f6f7fb;
 }
 
-/* Subtle premium background (image-ready later).
-   If you add a background image later, we can adapt this overlay. */
+/* Base background layer (stable) */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: radial-gradient(900px 500px at 20% 15%, rgba(120, 170, 255, 0.22), transparent 60%),
-    radial-gradient(900px 500px at 80% 20%, rgba(255, 190, 120, 0.20), transparent 60%),
-    radial-gradient(900px 500px at 50% 80%, rgba(140, 220, 180, 0.18), transparent 65%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.65));
+    background: var(--bg-gradients);
     pointer-events: none;
     z-index: -1;
 }
 
+/* Overlay background layer for smooth transitions (fades in/out) */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--bg-next);
+    opacity: var(--bg-transition);
+    transition: opacity 900ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::after { transition: none; }
+}
+
+/* Layout */
 .page {
     min-height: 100%;
     display: grid;
     grid-template-rows: 1fr auto;
 }
 
+/* Use flex to keep layout predictable and avoid grid spacing surprises */
 .content {
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertically center greeting unit */
+    align-items: center;     /* horizontally center */
     padding: 6vh 6vw 4vh;
     text-align: center;
 }
 
+/* Greeting + language as a single typographic unit */
+.stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+/* Greeting */
 .greeting {
     font-family: var(--font-sans);
     font-style: italic;
-    font-weight: 600;
+    font-weight: 550;
 
-    /* Responsive but controlled */
     font-size: clamp(2.2rem, 5vw, 4.2rem);
-    line-height: 1.06;
-    letter-spacing: -0.015em;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
 
     text-rendering: optimizeLegibility;
     font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
 
     max-width: 18ch;
-    padding: 0.2em 0.1em;
+
+    margin: 0;
+    padding: 0;
 }
 
+/* Typographic quotes around the greeting (color matches language label) */
+.greeting::before,
+.greeting::after {
+    color: var(--accent-muted);
+}
+
+.greeting::before {
+    content: "“";
+    margin-right: 0.08em;
+}
+
+.greeting::after {
+    content: "”";
+    margin-left: 0.08em;
+}
+
+/* Language label */
 .language {
-    margin-top: 0.35rem; /* closer to the greeting */
     font-family: var(--font-sans);
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    color: rgba(12, 15, 20, 0.62);
-    letter-spacing: 0.01em;
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    font-weight: 400;
+
+    color: var(--accent-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    margin: 0;
 }
 
+/* Error message */
 .error {
     margin-top: 1.0rem;
     font-family: var(--font-sans);
@@ -83,6 +150,7 @@ body::before {
     color: rgba(200, 40, 40, 0.9);
 }
 
+/* Footer */
 .footer {
     padding: 1.5rem 6vw 1.75rem;
     display: flex;
@@ -107,4 +175,38 @@ body::before {
     outline: 2px solid rgba(12, 15, 20, 0.25);
     outline-offset: 6px;
     border-bottom-color: transparent;
+}
+
+/* ---------- Fade-in (premium but subtle) ----------
+   We fade in the greeting unit and footer on load.
+   JS is not required for this.
+*/
+.stack,
+.footer {
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+@keyframes salutare-fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .stack {
+        animation: salutare-fade-in 700ms cubic-bezier(0.2, 0.9, 0.2, 1) 80ms forwards;
+        will-change: opacity, transform;
+    }
+    .footer {
+        animation: salutare-fade-in 700ms cubic-bezier(0.2, 0.9, 0.2, 1) 160ms forwards;
+        will-change: opacity, transform;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stack,
+    .footer {
+        opacity: 1;
+        transform: none;
+    }
 }

@@ -1,43 +1,56 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Salutare</title>
-    <meta name="description" content="Salutare – a daily greeting in a different language."/>
+    <meta name="description" content="Salutare – a daily greeting in a different language." />
 
-    <!--
-      Optional API base override for local development.
+    <meta name="salutare-api-base" content="" />
 
-      - Production (same domain as API):
-          leave empty => JS will call /api/v1/greeting
-
-      - Local development (Rust service on localhost:8080):
-          set content to "http://localhost:8080"
-    -->
-    <meta name="salutare-api-base" content="http://localhost:8080"/>
-
-    <link rel="stylesheet" href="./styles.css"/>
+    <link rel="stylesheet" href="./styles.css" />
     <!-- main.js is generated from TypeScript -->
     <script defer src="./main.js"></script>
+    <!-- Favicon & App Icons -->
+    <link rel="icon" href="/images/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/android-chrome-512x512.png">
+
+    <!-- Progressive Web App basics -->
+    <meta name="application-name" content="Salutare">
+    <meta name="apple-mobile-web-app-title" content="Salutare">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#FFD966">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Salutare">
+    <meta property="og:description" content="A daily greeting, in different languages.">
+    <meta property="og:image" content="https://salutare.danielkbx.com/images/logo-512.png">
+    <meta property="og:url" content="https://salutare.danielkbx.com/">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://salutare.danielkbx.com/images/logo-512.png">
 </head>
 
 <body>
 <main class="page" aria-live="polite">
     <section class="content" role="region" aria-label="Daily greeting">
-        <div class="greeting" id="greeting">Salutare</div>
-        <div class="language" id="language">Loading…</div>
+        <div class="stack" aria-label="Greeting and language">
+            <div class="greeting" id="greeting">Salutare</div>
+            <div class="language" id="language">Loading…</div>
+        </div>
 
         <div class="error" id="error" hidden></div>
     </section>
 
     <footer class="footer">
-        <a
-                class="repo"
-                href="https://github.com/danielkbx/salutare"
-                rel="noopener noreferrer"
-                target="_blank"
-        >
+        <a class="repo"  href="https://github.com/danielkbx/salutare"  rel="noopener noreferrer"  target="_blank" >
             GitHub
         </a>
     </footer>
