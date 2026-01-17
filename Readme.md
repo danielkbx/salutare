@@ -1,194 +1,113 @@
 # Salutare
 
-**Salutare** is a small public service that provides a daily greeting in a different language.
+**Salutare** delivers a daily greeting — always *“Good morning”* — in a different language each day.
 
-Each day, a single greeting is selected and returned in a predictable and reliable way.
-The service is intentionally simple, lightweight, and easy to integrate into websites,
-scripts, and applications.
+The service is intentionally simple and calm: one greeting, one language, one moment per day.
+It is designed as a small public utility rather than a product.
 
-Salutare is publicly available at:
-
-**https://salutare.danielkbx.com**
+The live service is available at  
+👉 **https://salutare.danielkbx.com**
 
 ---
 
-## Overview
+## Concept
 
-Salutare exposes a minimal HTTP API that returns:
+- One greeting per day
+- Deterministic selection (no randomness)
+- No repetition until all greetings are used
+- UTC-based day change
+- Simple, public, and reliable
 
-- one greeting per day
-- selected deterministically
-- consistent for all users worldwide
-- without repeating greetings until all available ones have been used
-
-The service is read-only and does not require authentication.
+Salutare can be used directly in a browser, embedded into other projects, or accessed programmatically via its API.
 
 ---
 
-## API Documentation
+## API Overview
 
 ### Base URL
 
 ```
-https://salutare.danielkbx.com/api/v1
+https://salutare.danielkbx.com
 ```
-
-All endpoints described below are versioned under `/api/v1`.
 
 ---
 
-### `GET /greeting`
+## Endpoint: Greeting of the Day
 
-Returns the greeting of the day as a JSON document.
+### `GET /api/v1/greeting`
 
-This endpoint is designed to be:
-- deterministic
-- globally consistent
-- safe to call from browsers and non-browser clients
+Returns the greeting of the current UTC day.
 
 #### Query Parameters
 
-| Name     | Type    | Required | Description |
-|----------|---------|----------|-------------|
-| `offset` | integer | no       | Shifts the deterministic selection by a number of days. Allows consumers to obtain a different, stable sequence of greetings. |
-
-The `offset` parameter is validated and limited to a safe range.
-
-#### Semantics of `offset`
-
-The offset modifies the internal day number before selecting the greeting.
-For a fixed offset value, the sequence of greetings:
-
-- is deterministic
-- does not repeat until all greetings have been used once
-- is independent from other offsets
-
-This makes it possible for multiple consumers to use the same API without receiving identical daily results.
-
-#### Example Requests
-
-```http
-GET /api/v1/greeting
-```
-
-```http
-GET /api/v1/greeting?offset=17
-```
-
-```http
-GET /api/v1/greeting?offset=-3
-```
-
-#### Successful Response
-
-**Status:** `200 OK`  
-**Content-Type:** `application/json`
-
-```json
-{
-  "date_utc": "2026-01-16",
-  "day_number_utc": 20454,
-  "offset": 0,
-  "id": 42,
-  "greeting": "Bonjour.",
-  "language": {
-    "de": "Französisch",
-    "en": "French"
-  }
-}
-```
-
-#### Response Fields
-
-| Field            | Type    | Description |
-|------------------|---------|-------------|
-| `date_utc`       | string  | UTC date used for selection (`YYYY-MM-DD`). |
-| `day_number_utc` | integer | Number of days since the Unix epoch (UTC). |
-| `offset`         | integer | Offset applied to the day number. |
-| `id`             | integer | Identifier of the selected greeting row. |
-| `greeting`       | string  | Greeting text in the selected language. |
-| `language.de`    | string  | Name of the language in German. |
-| `language.en`    | string  | Name of the language in English. |
-
----
-
-### `GET /healthz`
-
-Lightweight health and readiness endpoint.
-
-#### Response
-
-**Status:** `200 OK`  
-**Content-Type:** `text/plain`
+| Name   | Type    | Required | Description |
+|-------|---------|----------|-------------|
+| offset | integer | no | Optional deterministic offset. Allows callers to retrieve a different greeting without affecting global order. |
 
 Example:
 
 ```
-OK – 134 greetings loaded
+/api/v1/greeting?offset=3
 ```
 
-The response confirms that:
-- the service is running
-- the greetings data was successfully loaded at startup
+---
+
+## Response Format
+
+```json
+{
+  "date_utc": "2026-01-17",
+  "day_number_utc": 19745,
+  "offset": 0,
+  "id": 42,
+  "greeting": "Buenos días",
+  "language": {
+    "de": "Spanisch",
+    "en": "Spanish"
+  }
+}
+```
+
+### Fields
+
+| Field | Description |
+|-----|-------------|
+| `date_utc` | Current date in UTC |
+| `day_number_utc` | Sequential day number since Unix epoch (UTC) |
+| `offset` | Applied offset (0 if none) |
+| `id` | Internal greeting identifier |
+| `greeting` | The greeting text |
+| `language.de` | Language name in German |
+| `language.en` | Language name in English |
 
 ---
 
-## Day Definition
+## Error Responses
 
-The concept of “today” is defined strictly as:
+Errors are returned as JSON:
 
-- **00:00 UTC → 23:59:59 UTC**
+```json
+{
+  "error": "Invalid offset parameter"
+}
+```
 
-The greeting changes exactly at UTC midnight.
-Local server timezones and client timezones are intentionally ignored.
-
----
-
-## Greeting Selection Guarantees
-
-The service guarantees that:
-
-- greetings do not repeat until all available greetings have been used once
-- the same request parameters always produce the same result
-- results are stable across restarts
-
-These guarantees apply independently for each distinct `offset` value.
-
----
-
-## CORS Policy
-
-The API is intentionally public and can be consumed directly from browsers.
-
-- `Access-Control-Allow-Origin: *`
-- `GET` and `OPTIONS` methods allowed
-- No credentials
-
-Abuse protection and usage limits are enforced at the server and proxy level.
+HTTP status codes follow standard semantics (`400`, `429`, `500`, etc.).
 
 ---
 
 ## Usage Examples
 
-All examples use the public base URL:
-
-- **Base URL:** `https://salutare.danielkbx.com/api/v1`
-
 ### curl
 
-**Greeting of the day**
 ```bash
-curl -s "https://salutare.danielkbx.com/api/v1/greeting"
+curl https://salutare.danielkbx.com/api/v1/greeting
 ```
 
-**Greeting with offset**
-```bash
-curl -s "https://salutare.danielkbx.com/api/v1/greeting?offset=17"
-```
+With offset:
 
-**Health check**
 ```bash
-curl -s "https://salutare.danielkbx.com/api/v1/healthz"
+curl "https://salutare.danielkbx.com/api/v1/greeting?offset=5"
 ```
 
 ---
@@ -197,352 +116,145 @@ curl -s "https://salutare.danielkbx.com/api/v1/healthz"
 
 ```html
 <script>
-  async function fetchSalutareGreeting(offset = 0) {
-    const url = new URL("https://salutare.danielkbx.com/api/v1/greeting");
-    if (offset !== 0) url.searchParams.set("offset", String(offset));
-
-    const res = await fetch(url.toString(), {
-      method: "GET",
-      headers: { "Accept": "application/json" }
-    });
-
-    if (!res.ok) {
-      // If the service returns a JSON error (400), try to read it.
-      const text = await res.text();
-      throw new Error(`Salutare error ${res.status}: ${text}`);
-    }
-
-    return await res.json();
-  }
-
-  (async () => {
-    try {
-      const data = await fetchSalutareGreeting(17);
-      console.log("Salutare greeting:", data);
-      // Example: render it into the page
-      document.body.innerText = `${data.greeting} (${data.language.en})`;
-    } catch (err) {
-      console.error(err);
-    }
-  })();
+fetch("/api/v1/greeting")
+  .then(r => r.json())
+  .then(data => {
+    console.log(`${data.greeting} (${data.language.en})`);
+  });
 </script>
 ```
 
 ---
 
-### JavaScript (Node.js 18+)
-
-Node 18+ ships with `fetch()` built-in.
+### JavaScript (Node.js)
 
 ```js
-async function fetchSalutareGreeting(offset = 0) {
-  const url = new URL("https://salutare.danielkbx.com/api/v1/greeting");
-  if (offset !== 0) url.searchParams.set("offset", String(offset));
+const fetch = require("node-fetch");
 
-  const res = await fetch(url, {
-    headers: { "Accept": "application/json" }
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Salutare error ${res.status}: ${text}`);
-  }
-
-  return await res.json();
+async function run() {
+  const res = await fetch("https://salutare.danielkbx.com/api/v1/greeting");
+  const data = await res.json();
+  console.log(`${data.greeting} (${data.language.en})`);
 }
 
-(async () => {
-  const data = await fetchSalutareGreeting(17);
-  console.log(data);
-})();
+run();
 ```
 
 ---
 
-### Swift (iOS/macOS)
+### Python (Standard Library only)
+
+```python
+import json
+import urllib.request
+from urllib.parse import urlencode
+
+API_URL = "https://salutare.danielkbx.com/api/v1/greeting"
+
+def fetch_greeting(offset=None):
+    url = API_URL
+    if offset is not None:
+        url += "?" + urlencode({"offset": offset})
+
+    with urllib.request.urlopen(url, timeout=5) as response:
+        data = json.loads(response.read().decode("utf-8"))
+
+    greeting = data["greeting"]
+    language = data["language"]["en"]
+
+    print(f"{greeting} ({language})")
+
+if __name__ == "__main__":
+    fetch_greeting()
+```
+
+Notes:
+- Uses only Python’s standard library
+- UTF-8 handling is automatic
+- `offset` is optional
+
+---
+
+### Swift
 
 ```swift
 import Foundation
 
-struct GreetingResponse: Decodable {
-    struct LanguageInfo: Decodable {
-        let de: String
-        let en: String
+let url = URL(string: "https://salutare.danielkbx.com/api/v1/greeting")!
+
+URLSession.shared.dataTask(with: url) { data, _, _ in
+    guard let data = data else { return }
+    let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+    if
+        let greeting = json?["greeting"] as? String,
+        let language = (json?["language"] as? [String: String])?["en"]
+    {
+        print("\(greeting) (\(language))")
     }
-
-    let date_utc: String
-    let day_number_utc: Int
-    let offset: Int
-    let id: Int
-    let greeting: String
-    let language: LanguageInfo
-}
-
-func fetchSalutareGreeting(offset: Int? = nil) async throws -> GreetingResponse {
-    var components = URLComponents(string: "https://salutare.danielkbx.com/api/v1/greeting")!
-    if let offset = offset, offset != 0 {
-        components.queryItems = [URLQueryItem(name: "offset", value: String(offset))]
-    }
-
-    var request = URLRequest(url: components.url!)
-    request.httpMethod = "GET"
-    request.setValue("application/json", forHTTPHeaderField: "Accept")
-
-    let (data, response) = try await URLSession.shared.data(for: request)
-
-    guard let http = response as? HTTPURLResponse else {
-        throw URLError(.badServerResponse)
-    }
-    guard (200...299).contains(http.statusCode) else {
-        let body = String(data: data, encoding: .utf8) ?? ""
-        throw NSError(domain: "Salutare", code: http.statusCode, userInfo: [
-            NSLocalizedDescriptionKey: "HTTP \(http.statusCode): \(body)"
-        ])
-    }
-
-    return try JSONDecoder().decode(GreetingResponse.self, from: data)
-}
-
-// Example usage:
-// Task {
-//     do {
-//         let greeting = try await fetchSalutareGreeting(offset: 17)
-//         print("\(greeting.greeting) (\(greeting.language.en))")
-//     } catch {
-//         print("Error:", error)
-//     }
-// }
+}.resume()
 ```
 
 ---
 
-### Rust (reqwest)
-
-Add dependency:
-
-```toml
-# Cargo.toml
-[dependencies]
-reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
-serde = { version = "1", features = ["derive"] }
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
-```
-
-Example code:
+### Rust
 
 ```rust
-use serde::Deserialize;
+use reqwest::blocking::get;
+use serde_json::Value;
 
-#[derive(Debug, Deserialize)]
-struct GreetingResponse {
-    date_utc: String,
-    day_number_utc: i64,
-    offset: i64,
-    id: u32,
-    greeting: String,
-    language: LanguageInfo,
-}
+fn main() {
+    let resp = get("https://salutare.danielkbx.com/api/v1/greeting")
+        .unwrap()
+        .text()
+        .unwrap();
 
-#[derive(Debug, Deserialize)]
-struct LanguageInfo {
-    de: String,
-    en: String,
-}
+    let json: Value = serde_json::from_str(&resp).unwrap();
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let offset = 17i64;
-    let url = format!(
-        "https://salutare.danielkbx.com/api/v1/greeting?offset={}",
-        offset
-    );
+    let greeting = json["greeting"].as_str().unwrap();
+    let language = json["language"]["en"].as_str().unwrap();
 
-    let client = reqwest::Client::new();
-    let res = client
-        .get(url)
-        .header(reqwest::header::ACCEPT, "application/json")
-        .send()
-        .await?;
-
-    let status = res.status();
-    let body = res.text().await?;
-
-    if !status.is_success() {
-        return Err(format!("Salutare error {}: {}", status, body).into());
-    }
-
-    let parsed: GreetingResponse = serde_json::from_str(&body)?;
-    println!("{} ({})", parsed.greeting, parsed.language.en);
-
-    Ok(())
+    println!("{} ({})", greeting, language);
 }
 ```
 
 ---
 
-### Go (net/http)
+### Go
 
 ```go
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"io"
-	"net/http"
-	"net/url"
-	"time"
+    "encoding/json"
+    "fmt"
+    "net/http"
 )
 
-type GreetingResponse struct {
-	DateUTC      string `json:"date_utc"`
-	DayNumberUTC int64  `json:"day_number_utc"`
-	Offset       int64  `json:"offset"`
-	ID           int    `json:"id"`
-	Greeting     string `json:"greeting"`
-	Language     struct {
-		DE string `json:"de"`
-		EN string `json:"en"`
-	} `json:"language"`
-}
-
-func fetchSalutareGreeting(offset int64) (*GreetingResponse, error) {
-	u, _ := url.Parse("https://salutare.danielkbx.com/api/v1/greeting")
-	if offset != 0 {
-		q := u.Query()
-		q.Set("offset", fmt.Sprintf("%d", offset))
-		u.RawQuery = q.Encode()
-	}
-
-	client := &http.Client{Timeout: 10 * time.Second}
-	req, _ := http.NewRequest(http.MethodGet, u.String(), nil)
-	req.Header.Set("Accept", "application/json")
-
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer res.Body.Close()
-
-	body, _ := io.ReadAll(res.Body)
-	if res.StatusCode < 200 || res.StatusCode > 299 {
-		return nil, fmt.Errorf("Salutare error %d: %s", res.StatusCode, string(body))
-	}
-
-	var parsed GreetingResponse
-	if err := json.Unmarshal(body, &parsed); err != nil {
-		return nil, err
-	}
-	return &parsed, nil
-}
-
 func main() {
-	data, err := fetchSalutareGreeting(17)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("%s (%s)\n", data.Greeting, data.Language.EN)
+    resp, _ := http.Get("https://salutare.danielkbx.com/api/v1/greeting")
+    defer resp.Body.Close()
+
+    var data map[string]interface{}
+    json.NewDecoder(resp.Body).Decode(&data)
+
+    greeting := data["greeting"].(string)
+    lang := data["language"].(map[string]interface{})["en"].(string)
+
+    fmt.Printf("%s (%s)\n", greeting, lang)
 }
 ```
 
 ---
 
-## Error Responses
+## Rate Limiting
 
-All error responses are returned as JSON and use standard HTTP status codes.
-The API does not return HTML error pages.
+The API is publicly accessible but rate-limited per IP to ensure fair usage.
 
-### Error Format
-
-**Content-Type:** `application/json`
-
-```json
-{
-  "error": "human-readable error message"
-}
-```
-
-### `400 Bad Request`
-
-Returned when request parameters are invalid or outside allowed limits.
-
-#### Typical Causes
-- `offset` is not a valid integer
-- `offset` is outside the allowed range
-
-#### Example: Offset out of range
-
-```http
-GET /api/v1/greeting?offset=999999
-```
-
-**Response:**
-```http
-HTTP/1.1 400 Bad Request
-Content-Type: application/json
-```
-
-```json
-{
-  "error": "offset out of range (allowed: -100000..100000)"
-}
-```
-
-### `404 Not Found`
-
-Returned when an unknown endpoint is requested.
-
-```http
-GET /api/v1/unknown
-```
-
-### `500 Internal Server Error`
-
-Returned only in case of an unexpected server-side failure.
-
-This typically indicates:
-- invalid or missing configuration at startup
-- internal invariants being violated
-
-In normal operation, these errors should not occur.
+If you exceed the limit, the API will respond with `429 Too Many Requests`.
 
 ---
 
-## Configuration
+## Source Code
 
-Salutare is configured via environment variables at startup.
-
-| Variable        | Description                            | Default              |
-|-----------------|----------------------------------------|----------------------|
-| `CSV_PATH`      | Path to the greetings CSV file         | `greetings.csv`     |
-| `SALUTARE_SALT` | Salt used for deterministic selection  | dev-only default     |
-| `BIND_ADDR`     | Address and port to bind the service   | `127.0.0.1:8080`    |
-
-The service fails fast if configuration is invalid.
-
----
-
-## Development
-
-### Run locally
-
-```bash
-cargo run
-```
-
-### Run tests
-
-```bash
-cargo test
-```
-
-Integration tests verify the core invariants of the greeting selection logic.
-
----
-
-## Status
-
-- Core functionality complete
-- Public API stable (`/api/v1`)
-- Ready for deployment and operation
-
+GitHub repository:  
+👉 https://github.com/danielkbx/salutare
