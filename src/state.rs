@@ -19,4 +19,6 @@ pub struct AppState {
     pub greetings: Arc<Vec<GreetingRow>>,
     /// Deterministic shuffled index order over `greetings`.
     pub permutations: Arc<Vec<usize>>,
+    /// Optional Slack signing key
+    pub slack_signing_secret: std::sync::Arc<Option<String>>,
 }

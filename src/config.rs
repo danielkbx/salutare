@@ -4,8 +4,9 @@
  * https://github.com/danielkbx/salutare
  */
 
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Context, Result};
 use std::{net::SocketAddr, path::PathBuf};
+use tracing::{Level, info};
 
 /// Central configuration for the Salutare service.
 ///
@@ -30,6 +31,9 @@ pub struct Config {
 
     /// Bind address for the HTTP server.
     pub bind_addr: SocketAddr,
+
+    /// The signing key used to verify communication with Slack.
+    pub slack_signing_secret: Option<String>,
 }
 
 impl Config {
@@ -50,10 +54,17 @@ impl Config {
             .parse()
             .with_context(|| format!("Invalid BIND_ADDR '{}'", bind_addr))?;
 
+        // Slack Signing Key: optional, creates an error when the endpoint is requested
+        let slack_signing_secret = std::env::var("SLACK_SIGNING_SECRET")
+            .ok()
+            .map(|s| s.trim().to_string())
+            .filter(|s| !s.is_empty());
+
         let cfg = Self {
             csv_path,
             salt,
             bind_addr,
+            slack_signing_secret,
         };
 
         cfg.validate()?;
@@ -81,6 +92,13 @@ impl Config {
         // We do not enforce strong secrets here, but we provide guardrails.
         if self.salt.trim().is_empty() {
             anyhow::bail!("SALUTARE_SALT must not be empty");
+        }
+
+        // Slack integration is optional.
+        // If no signing secret is configured, the server will still start,
+        // but the Slack endpoint will return 501 Not Implemented.
+        if self.slack_signing_secret.is_none() {
+            info!("No SLACK_SIGNING_SECRET found, Slack command will return an error");
         }
 
         Ok(())

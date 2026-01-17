@@ -60,6 +60,7 @@ async fn main() -> Result<()> {
     let state = AppState {
         greetings: std::sync::Arc::new(greetings),
         permutations: std::sync::Arc::new(permutations),
+        slack_signing_secret: std::sync::Arc::new(cfg.slack_signing_secret),
     };
 
     let cors = CorsLayer::new()
@@ -75,6 +76,7 @@ async fn main() -> Result<()> {
     let app = Router::new()
         .route("/api/v1/healthz", get(salutare::http::handlers::healthz))
         .route("/api/v1/greeting", get(handlers::greeting))
+        .route("/slack/command", axum::routing::post(salutare::http::slack::command))
         .with_state(state)
         .layer(cors);
 
