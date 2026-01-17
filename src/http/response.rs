@@ -1,3 +1,9 @@
+/*
+ * Copyright © 2026 Daniel Wetzel
+ * Licensed under the Apache License, Version 2.0
+ * https://github.com/danielkbx/salutare
+ */
+
 use serde::Serialize;
 
 /// JSON response returned by GET /api/v1/greeting.

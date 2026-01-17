@@ -1,5 +1,9 @@
 # Salutare
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+![Status](https://img.shields.io/badge/status-beta-brightgreen)
+![API](https://img.shields.io/badge/API-public-blue)
+
 **Salutare** delivers a daily greeting — always *“Good morning”* — in a different language each day.
 
 The service is intentionally simple and calm: one greeting, one language, one moment per day.
@@ -8,12 +12,14 @@ It is designed as a small public utility rather than a product.
 The live service is available at  
 👉 **https://salutare.danielkbx.com**
 
+The API is publicly available at  
+👉 **https://salutare.danielkbx.com/api/v1**
+
 ---
 
 ## Concept
 
 - One greeting per day
-- Deterministic selection (no randomness)
 - No repetition until all greetings are used
 - UTC-based day change
 - Simple, public, and reliable
@@ -254,7 +260,7 @@ If you exceed the limit, the API will respond with `429 Too Many Requests`.
 
 ---
 
-## Source Code
+## License
 
-GitHub repository:  
-👉 https://github.com/danielkbx/salutare
+Apache License 2.0  
+© 2026 Daniel Wetzel (danielkbx)

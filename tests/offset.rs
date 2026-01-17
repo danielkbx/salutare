@@ -1,5 +1,10 @@
-use salutare::greetings::{build_deterministic_permutation, pick_index};
+/*
+ * Copyright © 2026 Daniel Wetzel
+ * Licensed under the Apache License, Version 2.0
+ * https://github.com/danielkbx/salutare
+ */
 
+use salutare::greetings::{build_deterministic_permutation, pick_index};
 #[test]
 fn offset_zero_matches_base_behavior() {
     let n = 50;

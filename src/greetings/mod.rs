@@ -1,3 +1,9 @@
+/*
+ * Copyright © 2026 Daniel Wetzel
+ * Licensed under the Apache License, Version 2.0
+ * https://github.com/danielkbx/salutare
+ */
+
 /// The `greetings` module is responsible for:
 /// - Defining the in-memory data model for greetings
 /// - Loading greetings from CSV at application startup

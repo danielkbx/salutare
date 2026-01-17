@@ -1,6 +1,11 @@
+/*
+ * Copyright © 2026 Daniel Wetzel
+ * Licensed under the Apache License, Version 2.0
+ * https://github.com/danielkbx/salutare
+ */
+
 use salutare::greetings::build_deterministic_permutation;
 use std::collections::HashSet;
-
 #[test]
 fn permutation_is_a_true_permutation() {
     let n = 128;

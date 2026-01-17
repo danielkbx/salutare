@@ -1,6 +1,11 @@
+/*
+ * Copyright © 2026 Daniel Wetzel
+ * Licensed under the Apache License, Version 2.0
+ * https://github.com/danielkbx/salutare
+ */
+
 use salutare::greetings::build_deterministic_permutation;
 use std::collections::HashSet;
-
 #[test]
 fn no_repeats_within_one_full_cycle() {
     let n = 365;

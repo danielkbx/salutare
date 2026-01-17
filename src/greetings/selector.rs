@@ -1,3 +1,9 @@
+/*
+ * Copyright © 2026 Daniel Wetzel
+ * Licensed under the Apache License, Version 2.0
+ * https://github.com/danielkbx/salutare
+ */
+
 /// Pure selection logic used by the HTTP handler.
 ///
 /// This function is intentionally deterministic and side-effect free so it can be unit-tested.
