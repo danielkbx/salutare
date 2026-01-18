@@ -77,6 +77,7 @@ async fn main() -> Result<()> {
         .route("/api/v1/healthz", get(salutare::http::handlers::healthz))
         .route("/api/v1/greeting", get(handlers::greeting))
         .route("/slack/command", axum::routing::post(salutare::http::slack::command))
+        .route("/slack/oauth/callback", axum::routing::get(salutare::http::slack_oauth::callback))
         .with_state(state)
         .layer(cors);
 
