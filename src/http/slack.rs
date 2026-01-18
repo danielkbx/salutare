@@ -28,7 +28,7 @@ type SlackNameCache = Arc<RwLock<HashMap<String, (String, Instant)>>>;
 
 const SLACK_NAME_CACHE_TTL: Duration = Duration::from_secs(60 * 60); // 1 hour
 const SLACK_NAME_CACHE_MAX_ENTRIES: usize = 10000;
-const SLACK_NAME_LOOKUP_TIMEOUT: Duration = Duration::from_millis(300);
+const SLACK_NAME_LOOKUP_TIMEOUT: Duration = Duration::from_millis(800);
 
 #[derive(Debug, Deserialize)]
 struct SlackCommandForm {
@@ -150,7 +150,7 @@ pub async fn command(
         username
     };
     let text = format!(
-        "{}{} {} – _{}_",
+        "{} {} {} – _{}_",
         username,
         verb,
         row.greeting,
