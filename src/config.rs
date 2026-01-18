@@ -34,6 +34,9 @@ pub struct Config {
 
     /// The signing key used to verify communication with Slack.
     pub slack_signing_secret: Option<String>,
+
+    /// The OAuth token to read the user's information used to create the message.
+    pub slack_bot_token: Option<String>,
 }
 
 impl Config {
@@ -60,11 +63,17 @@ impl Config {
             .map(|s| s.trim().to_string())
             .filter(|s| !s.is_empty());
 
+        let slack_bot_token = std::env::var("SLACK_BOT_TOKEN")
+            .ok()
+            .map(|s| s.trim().to_string())
+            .filter(|s| !s.is_empty());
+
         let cfg = Self {
             csv_path,
             salt,
             bind_addr,
             slack_signing_secret,
+            slack_bot_token,
         };
 
         cfg.validate()?;
@@ -99,6 +108,10 @@ impl Config {
         // but the Slack endpoint will return 501 Not Implemented.
         if self.slack_signing_secret.is_none() {
             info!("No SLACK_SIGNING_SECRET found, Slack command will return an error");
+        } else {
+            if self.slack_bot_token.is_none() {
+                tracing::info!("SLACK_BOT_TOKEN not set: display names will not be resolved");
+            }
         }
 
         Ok(())

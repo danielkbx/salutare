@@ -17,8 +17,18 @@ use hmac::{Hmac, Mac};
 use serde::Deserialize;
 use sha2::Sha256;
 use subtle::ConstantTimeEq;
+use std::time::{Duration, Instant};
+use std::collections::HashMap;
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use tokio::time::timeout;
 
 type HmacSha256 = Hmac<Sha256>;
+type SlackNameCache = Arc<RwLock<HashMap<String, (String, Instant)>>>;
+
+const SLACK_NAME_CACHE_TTL: Duration = Duration::from_secs(60 * 60); // 1 hour
+const SLACK_NAME_CACHE_MAX_ENTRIES: usize = 10000;
+const SLACK_NAME_LOOKUP_TIMEOUT: Duration = Duration::from_millis(300);
 
 #[derive(Debug, Deserialize)]
 struct SlackCommandForm {
@@ -29,6 +39,23 @@ struct SlackCommandForm {
     // Slack usually provides locale like "de-DE" or "en-US".
     // If missing, we assume non-German.
     locale: Option<String>,
+}
+
+#[derive(Debug, serde::Deserialize)]
+struct SlackUserResponse {
+    ok: bool,
+    user: SlackUser,
+}
+
+#[derive(Debug, serde::Deserialize)]
+struct SlackUser {
+    profile: SlackUserProfile,
+}
+
+#[derive(Debug, serde::Deserialize)]
+struct SlackUserProfile {
+    display_name: String,
+    real_name: String,
 }
 
 fn is_german_locale(locale: Option<&str>) -> bool {
@@ -88,19 +115,49 @@ pub async fn command(
     let verb = if is_de { "sagt" } else { "says" };
     // Optional: choose language label depending on locale
     let language_name = if is_de { &row.language_de } else { &row.language_en };
+
+    let cache = state.slack_name_cache.clone();
+
+    let username: String = if let Some(name) = get_cached_display_name(&cache, &form.user_id).await {
+        name
+    } else {
+        let mut username = form.user_name.clone();
+
+        if let Some(token) = state.slack_bot_token.as_ref() {
+            let token = token.clone();
+            let user_id = form.user_id.clone();
+
+            match timeout(SLACK_NAME_LOOKUP_TIMEOUT, resolve_display_name(&token, &user_id)).await {
+                Ok(Ok(name)) => {
+                    tracing::info!("Slack name lookup: resolved within timeout");
+
+                    username = name.clone();
+                    put_cached_display_name(&cache, user_id, name).await;
+                }
+                _ => {
+                    tracing::info!("Slack name lookup: timed out, falling back to handle");
+
+                    let cache_bg = cache.clone();
+                    tokio::spawn(async move {
+                        if let Ok(name) = resolve_display_name(&token, &user_id).await {
+                            put_cached_display_name(&cache_bg, user_id, name).await;
+                        }
+                    });
+                }
+            }
+        }
+
+        username
+    };
     let text = format!(
-        "{} {} {} (_{}_)",
-        form.user_name,
+        "{}{} {} – _{}_",
+        username,
         verb,
         row.greeting,
         language_name
     );
 
-    let msg = SlackMessage {
-        response_type: "in_channel",
-        text,
-    };
-
+    let msg = SlackMessage { response_type: "in_channel", text};
     (StatusCode::OK, Json(msg)).into_response()
 }
 
@@ -156,4 +213,78 @@ fn stable_user_offset(secret: &str, user_id: &str) -> i64 {
 
     // Keep it in a reasonable range; selection uses rem_euclid anyway.
     (v % 1_000_000) as i64
+}
+
+async fn resolve_display_name(bot_token: &str, user_id: &str) -> anyhow::Result<String> {
+    let client = reqwest::Client::new();
+
+    let resp = client
+        .get("https://slack.com/api/users.info")
+        .bearer_auth(bot_token)
+        .query(&[("user", user_id)])
+        .send()
+        .await?
+        .json::<SlackUserResponse>()
+        .await?;
+
+    if !resp.ok {
+        anyhow::bail!("Slack API returned ok=false");
+    }
+
+    let name = if !resp.user.profile.display_name.is_empty() {
+        resp.user.profile.display_name.clone()
+    } else {
+        resp.user.profile.real_name.clone()
+    };
+
+    Ok(name)
+}
+
+async fn get_cached_display_name(cache: &SlackNameCache, user_id: &str) -> Option<String> {
+    let map = cache.read().await;
+    if let Some((name, inserted)) = map.get(user_id) {
+        if inserted.elapsed() <= SLACK_NAME_CACHE_TTL {
+            return Some(name.clone());
+        }
+    }
+    None
+}
+
+async fn put_cached_display_name(cache: &SlackNameCache, user_id: String, name: String) {
+    let mut map = cache.write().await;
+
+    // Bound the cache growth: prune expired first if needed.
+    if map.len() >= SLACK_NAME_CACHE_MAX_ENTRIES {
+        let before = map.len();
+
+        map.retain(|_, (_, inserted)| inserted.elapsed() <= SLACK_NAME_CACHE_TTL);
+
+        let after = map.len();
+        if after < before {
+            tracing::info!(
+                "Slack name cache: {} expired entries removed ({} remaining)",
+                before - after,
+                after
+            );
+        }
+
+        // Still too large? Remove arbitrary entries.
+        if map.len() >= SLACK_NAME_CACHE_MAX_ENTRIES {
+            let overflow = map.len() - SLACK_NAME_CACHE_MAX_ENTRIES + 1;
+            let keys: Vec<String> = map.keys().take(overflow).cloned().collect();
+            for k in keys {
+                map.remove(&k);
+            }
+
+            tracing::info!(
+                "Slack name cache: pruned {} entries due to size limit ({} remaining)",
+                overflow,
+                map.len()
+            );
+        }
+    }
+
+    map.insert(user_id, (name, Instant::now()));
+
+    tracing::info!("Slack name cache: entry added ({} entries total)", map.len());
 }

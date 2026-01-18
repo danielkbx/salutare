@@ -6,6 +6,9 @@
 
 use crate::greetings::GreetingRow;
 use std::sync::Arc;
+use std::collections::HashMap;
+use std::time::Instant;
+use tokio::sync::RwLock;
 
 /// Application state shared across request handlers.
 ///
@@ -21,4 +24,11 @@ pub struct AppState {
     pub permutations: Arc<Vec<usize>>,
     /// Optional Slack signing key
     pub slack_signing_secret: std::sync::Arc<Option<String>>,
+    /// Optional Slack OAuth token
+    pub slack_bot_token: std::sync::Arc<Option<String>>,
+
+    /// Small in-memory cache for Slack display name lookups.
+    /// Key: Slack user_id (e.g. U12345)
+    /// Value: (display_name, inserted_at)
+    pub slack_name_cache: std::sync::Arc<RwLock<HashMap<String, (String, Instant)>>>,
 }

@@ -61,6 +61,8 @@ async fn main() -> Result<()> {
         greetings: std::sync::Arc::new(greetings),
         permutations: std::sync::Arc::new(permutations),
         slack_signing_secret: std::sync::Arc::new(cfg.slack_signing_secret),
+        slack_bot_token: std::sync::Arc::new(cfg.slack_bot_token),
+        slack_name_cache: std::sync::Arc::new(tokio::sync::RwLock::new(std::collections::HashMap::new())),
     };
 
     let cors = CorsLayer::new()
