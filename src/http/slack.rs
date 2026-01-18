@@ -85,21 +85,11 @@ pub async fn command(
 
     // Make authorship explicit in the message text.
     let is_de = is_german_locale(form.locale.as_deref());
-    let verb = if is_de { "sagt" } else { "says" };
     // Optional: choose language label depending on locale
     let language_name = if is_de { &row.language_de } else { &row.language_en };
-    let text = format!(
-        "{} {} {} (_{}_)",
-        form.user_name,
-        verb,
-        row.greeting,
-        language_name
-    );
+    let text = format!("{} – _{}_", row.greeting, language_name);
 
-    let msg = SlackMessage {
-        response_type: "in_channel",
-        text,
-    };
+    let msg = SlackMessage {response_type: "in_channel", text};
 
     (StatusCode::OK, Json(msg)).into_response()
 }
